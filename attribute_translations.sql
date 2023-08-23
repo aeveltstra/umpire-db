@@ -1,4 +1,4 @@
-REATE TABLE `attribute_translations` (
+CREATE TABLE `attribute_translations` (
   `language_code` varchar(24) CHARACTER SET ascii NOT NULL,
   `attribute_id` char(24) NOT NULL,
   `translation` text NOT NULL,
