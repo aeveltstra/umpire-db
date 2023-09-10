@@ -13,7 +13,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`email_hash`),
   KEY `token` (`key_hash`, `secret_hash`),
   KEY `hashing` (`hashing_algo`, `hashing_version`),
-  KEY `last_hashed` (`last_hashed`),
+  KEY `last_hashed` (`last_hashed_date`),
   KEY `access_requested_on` (`access_requested_on`),
   KEY `reset_key` (`reset_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='People allowed to use the system';
