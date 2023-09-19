@@ -9,4 +9,4 @@ The intent is to make it possible for anyone to enter cases, but only a select f
 
 This database model is designed for use with MySQL, using the InnoDB storage engine. This should suffice for initial needs and activity expectations. It is expected an application developer will use a common middleware web language like php or python to connect a web application to the database.
 
-Note that this repository does not contain any data. It merely contains the DDL instructions to recreate the database model.
+Note that this repository does not contain information about missing and deceased people. It merely contains the DDL instructions to recreate the database model, and the initial data setup to allow for populating profiles.
