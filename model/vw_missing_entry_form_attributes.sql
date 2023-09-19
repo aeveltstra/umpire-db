@@ -1,12 +1,12 @@
 create view `vw_missing_entry_form_attributes` as 
-    SELECT a.`id` as `$id`, 
+    SELECT a.`id`,
            a.`data_type`, 
-           t.`translation` as `$caption`, 
-           t.`hint` as `$hint`, 
-           a.`min` as `$min`, 
-           a.`max` as `$max`,
-           f.`display_sequence`,
-           f.`hide_on_entry` as `$hide_on_entry`
+           t.`translation` as `caption`, 
+           t.`hint`,
+           a.`min`,
+           a.`max`,
+           f.`hide_on_entry`,
+           f.`display_sequence`
       FROM `attributes` as a 
      inner join `form_attributes` as f
         on f.`attribute` = a.id
