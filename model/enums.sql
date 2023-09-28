@@ -2,6 +2,7 @@ CREATE TABLE `enums` (
  `attribute_id` char(24) NOT NULL,
  `enum_value` varchar(24) NOT NULL,
  `language_code` varchar(24) CHARACTER SET ascii NOT NULL,
+ `caption` varchar(256) NOT NULL,
  PRIMARY KEY (`attribute_id`,`enum_value`,`language_code`) USING BTREE,
  KEY `ix_lang` (`language_code`),
  KEY `ix_attrib` (`attribute_id`) USING BTREE,
