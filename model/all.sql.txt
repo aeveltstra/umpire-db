@@ -1,0 +1,698 @@
+
+-- phpMyAdmin SQL Dump
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
+--
+-- Host: custsql-glo01.eigbox.net
+-- Generation Time: Oct 28, 2023 at 08:02 AM
+-- Server version: 5.6.51-91.0-log
+-- PHP Version: 7.0.33-0ubuntu0.16.04.14
+
+SET time_zone = "+00:00";
+
+--
+-- Database: `lammp`
+--
+CREATE DATABASE IF NOT EXISTS `lammp` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE lammp;
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`van`@`10.%` PROCEDURE `sp_log_user_event` (IN `user` INT(10) UNSIGNED, IN `event` INT(10) UNSIGNED)  begin
+insert into `user_events` (`user`, `event`) values (user, event);
+END$$
+
+CREATE DEFINER=`van`@`10.%` PROCEDURE `sp_log_user_event_by_value` (IN `user_email_hash` CHAR(128) CHARSET utf8, IN `event_name` VARCHAR(256) CHARSET utf8)  begin
+    declare user_int int(10) default null;
+    declare event_int int(10) default null;
+    select seq into user_int from users where email_hash = user_email_hash;
+    if (user_int is not null) THEN
+        select seq into event_int from events where name = event_name;
+        if (event_int is null) THEN
+            insert into events (name) values (event_name);
+            select seq into event_int from events where name = event_name;
+        end if;
+        if (event_int is not null) THEN
+            insert into user_events (user, event) values (user_int, event_int);
+        end if;
+    end if;
+END$$
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attributes`
+--
+
+CREATE TABLE "attributes" ;
+
+--
+-- Truncate table before insert `attributes`
+--
+
+TRUNCATE TABLE `attributes`;
+--
+-- Dumping data for table `attributes`
+--
+
+INSERT INTO `attributes` (`id`, `data_type`, `min`, `max`, `default`) VALUES
+('aliases', 'shorttext', 0, 256, ''),
+('birth_year', 'integer', 1000, 3000, ''),
+('birth_year_accuracy', 'percent', 0, 100, ''),
+('case_id', 'shorttext', 1, 256, ''),
+('case_status', 'enum', 1, 256, ''),
+('chosen_name', 'shorttext', 1, 256, ''),
+('contact_if_found', 'longtext', 1, 14400, ''),
+('date_calendar_type', 'enum', 1, 256, ''),
+('disappear_circumstances', 'longtext', 1, 65500, ''),
+('entered_by', 'shorttext', 1, 256, ''),
+('entered_on_date', 'date', 8, 8, ''),
+('ethnicity', 'enum', 1, 256, ''),
+('eye_color', 'shorttext', 1, 256, ''),
+('eye_color_std', 'enum', 1, 256, ''),
+('found_on_date', 'date', 8, 8, ''),
+('found_on_date_accuracy', 'percent', 0, 100, ''),
+('given_name', 'shorttext', 1, 256, ''),
+('hair_color', 'shorttext', 1, 256, ''),
+('hair_color_std', 'enum', 1, 256, ''),
+('height', 'integer', 1, 256, ''),
+('height_unit', 'enum', 1, 256, ''),
+('identifying_features', 'longtext', 1, 65500, ''),
+('last_modified_by', 'enum', 1, 256, ''),
+('last_modified_on_date', 'date', 8, 8, ''),
+('last_seen_activity', 'longtext', 1, 65500, ''),
+('last_seen_alive_date_acc', 'percent', 0, 100, ''),
+('last_seen_alive_on_date', 'date', 8, 8, ''),
+('last_seen_at_location', 'shorttext', 1, 256, ''),
+('last_seen_date_accuracy', 'percent', 0, 100, ''),
+('last_seen_on_date', 'date', 8, 8, ''),
+('last_seen_wearing', 'longtext', 1, 65500, ''),
+('other_notes', 'longtext', 1, 65500, ''),
+('posters_generated_on', 'date', 8, 8, ''),
+('pronouns', 'shorttext', 1, 256, ''),
+('weight', 'integer', 1, 256, ''),
+('weight_unit', 'enum', 1, 256, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attribute_translations`
+--
+
+CREATE TABLE "attribute_translations" ;
+
+--
+-- Truncate table before insert `attribute_translations`
+--
+
+TRUNCATE TABLE `attribute_translations`;
+--
+-- Dumping data for table `attribute_translations`
+--
+
+INSERT INTO `attribute_translations` (`language_code`, `attribute_id`, `translation`, `hint`) VALUES
+('en', 'aliases', 'Other Names', ''),
+('en', 'birth_year', 'Birth Year', ''),
+('en', 'birth_year_accuracy', 'Birth Year Accuracy (%)', ''),
+('en', 'case_id', 'Case ID', ''),
+('en', 'case_status', 'Case Status', ''),
+('en', 'chosen_name', 'Chosen Name', ''),
+('en', 'contact_if_found', 'Contact if Found', ''),
+('en', 'date_calendar_type', 'Calendar Type for Dates', ''),
+('en', 'disappear_circumstances', 'Disappearance Circumstances', ''),
+('en', 'entered_by', 'Entered By', ''),
+('en', 'entered_on_date', 'Entered On (Date)', ''),
+('en', 'ethnicity', 'Ethnicity', ''),
+('en', 'eye_color', 'Eye Color', ''),
+('en', 'eye_color_std', 'Standard Eye Color', ''),
+('en', 'given_name', 'Given Name / Government Name', ''),
+('en', 'hair_color', 'Hair Color', ''),
+('en', 'hair_color_std', 'Standard Hair Color', ''),
+('en', 'height', 'Height', ''),
+('en', 'height_unit', 'Height Unit of Measurement', ''),
+('en', 'identifying_features', 'Identifying Features', ''),
+('en', 'last_modified_by', 'Last Modified By', ''),
+('en', 'last_modified_on_date', 'Last Modified On (Date)', ''),
+('en', 'last_seen_activity', 'Activity when Last Seen', ''),
+('en', 'last_seen_at_location', 'Last Seen At (Location)', ''),
+('en', 'last_seen_date_accuracy', 'Accuracy of Date Last Seen (%)', ''),
+('en', 'last_seen_on_date', 'Last Seen (Date)', ''),
+('en', 'last_seen_wearing', 'Last Seen Wearing', ''),
+('en', 'other_notes', 'Other Notes', ''),
+('en', 'posters_generated_on', 'Posters Generated On (Date)', ''),
+('en', 'pronouns', 'Pronouns', ''),
+('en', 'weight', 'Weight', ''),
+('en', 'weight_unit', 'Unit of Weight Measurement', ''),
+('nl', 'aliases', 'Andere namen', ''),
+('nl', 'birth_year', 'Geboortejaar', ''),
+('nl', 'birth_year_accuracy', 'Accuratesse van het geboortejaar (%)', ''),
+('nl', 'case_id', 'Zaaknummer', ''),
+('nl', 'case_status', 'Zaakstatus', ''),
+('nl', 'chosen_name', 'Gekozen Naam', ''),
+('nl', 'contact_if_found', 'Contact als gevonden', ''),
+('nl', 'date_calendar_type', 'Kalendertype voor Datums', ''),
+('nl', 'disappear_circumstances', 'Verdwijningsomstandigheden', ''),
+('nl', 'entered_by', 'Ingevoerd door', ''),
+('nl', 'entered_on_date', 'Ingevoerd op (datum)', ''),
+('nl', 'ethnicity', 'Etniciteit', ''),
+('nl', 'eye_color', 'Oogkleur', ''),
+('nl', 'eye_color_std', 'Standaard oogkleur', ''),
+('nl', 'given_name', 'Gegeven naam / Overheidsnaam', ''),
+('nl', 'hair_color', 'Haarkleur', ''),
+('nl', 'hair_color_std', 'Standaard haarkleur', ''),
+('nl', 'height', 'Lengte', ''),
+('nl', 'height_unit', 'Maateenheid voor Lengte', ''),
+('nl', 'identifying_features', 'Identificerende eigenschappen', ''),
+('nl', 'last_modified_by', 'Laatst bewerkt door', ''),
+('nl', 'last_modified_on_date', 'Laatst bewerkt op (datum)', ''),
+('nl', 'last_seen_activity', 'Activiteit terwijl laatst gezien', ''),
+('nl', 'last_seen_at_location', 'Laatst gezien op (locatie)', ''),
+('nl', 'last_seen_date_accuracy', 'Accuratesse van de laatst-gezien datum (%)', ''),
+('nl', 'last_seen_on_date', 'Laatst gezien op (datum)', ''),
+('nl', 'last_seen_wearing', 'Laatst gezien in kleding', ''),
+('nl', 'other_notes', 'Opmerkingen', ''),
+('nl', 'posters_generated_on', 'Posters aangemaakt op (datum)', ''),
+('nl', 'pronouns', 'Aanheffing', ''),
+('nl', 'weight', 'Gewicht', ''),
+('nl', 'weight_unit', 'Maateenheid voor Gewicht', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `date_values`
+--
+
+CREATE TABLE "date_values" ;
+
+--
+-- Truncate table before insert `date_values`
+--
+
+TRUNCATE TABLE `date_values`;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `enums`
+--
+
+CREATE TABLE "enums" ;
+
+--
+-- Truncate table before insert `enums`
+--
+
+TRUNCATE TABLE `enums`;
+--
+-- Dumping data for table `enums`
+--
+
+INSERT INTO `enums` (`attribute_id`, `enum_value`, `language_code`, `caption`) VALUES
+('case_status', 'solved', 'en', 'Solved'),
+('case_status', 'unsolved', 'en', 'Unsolved'),
+('date_calendar_type', 'burmese', 'en', 'Burmese'),
+('date_calendar_type', 'gregorian', 'en', 'Gregorian: used most'),
+('date_calendar_type', 'hebrew', 'en', 'Hebrew'),
+('date_calendar_type', 'indian', 'en', 'Indian National'),
+('date_calendar_type', 'japanese', 'en', 'Japanese'),
+('date_calendar_type', 'lunar hijri', 'en', 'Lunar Hijri'),
+('date_calendar_type', 'solar hijri', 'en', 'Solar Hijri'),
+('date_calendar_type', 'thai', 'en', 'Thai'),
+('date_calendar_type', 'vikram savat', 'en', 'Indian Hindu'),
+('ethnicity', '1', 'en', 'White'),
+('ethnicity', '2', 'en', 'Black or African American'),
+('ethnicity', '3', 'en', 'Hispanic or Latino'),
+('ethnicity', '4', 'en', 'Asian'),
+('ethnicity', '5', 'en', 'American Indian or Alaska Native'),
+('ethnicity', '7', 'en', 'Native Hawaiian or Other Pacific Islander'),
+('ethnicity', '9', 'en', 'Other'),
+('ethnicity', 'unknown', 'en', 'Unknown'),
+('eye_color_std', 'black', 'en', 'Black'),
+('eye_color_std', 'blue', 'en', 'Blue'),
+('eye_color_std', 'brown', 'en', 'Brown'),
+('eye_color_std', 'green', 'en', 'Green'),
+('eye_color_std', 'grey', 'en', 'Grey'),
+('eye_color_std', 'hazel', 'en', 'Hazel'),
+('eye_color_std', 'multiple', 'en', 'Multiple'),
+('eye_color_std', 'red', 'en', 'Red'),
+('eye_color_std', 'unknown', 'en', 'Unknown'),
+('hair_color_std', 'black', 'en', 'Black'),
+('hair_color_std', 'blonde', 'en', 'Blonde'),
+('hair_color_std', 'blue', 'en', 'Blue'),
+('hair_color_std', 'brown', 'en', 'Brown'),
+('hair_color_std', 'dirty blonde', 'en', 'Dirty Blonde'),
+('hair_color_std', 'ginger', 'en', 'Ginger / Red'),
+('hair_color_std', 'green', 'en', 'Green'),
+('hair_color_std', 'grey', 'en', 'Grey'),
+('hair_color_std', 'multiple', 'en', 'Multiple'),
+('hair_color_std', 'pink', 'en', 'Pink'),
+('hair_color_std', 'platinum', 'en', 'Platinum'),
+('hair_color_std', 'purple', 'en', 'Purple'),
+('hair_color_std', 'red', 'en', 'Red'),
+('hair_color_std', 'unknown', 'en', 'Unknown'),
+('hair_color_std', 'white', 'en', 'White'),
+('height_unit', 'centimeter', 'en', 'Centimeter'),
+('height_unit', 'inches', 'en', 'Inches'),
+('weight_unit', 'kilograms', 'en', 'Kilograms'),
+('weight_unit', 'lbs', 'en', 'Pounds');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `enum_values`
+--
+
+CREATE TABLE "enum_values" ;
+
+--
+-- Truncate table before insert `enum_values`
+--
+
+TRUNCATE TABLE `enum_values`;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `events`
+--
+
+CREATE TABLE "events" ;
+
+--
+-- Truncate table before insert `events`
+--
+
+TRUNCATE TABLE `events`;
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`seq`, `name`) VALUES
+(1, 'authenticated'),
+(2, 'applied_for_access');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `forms`
+--
+
+CREATE TABLE "forms" ;
+
+--
+-- Truncate table before insert `forms`
+--
+
+TRUNCATE TABLE `forms`;
+--
+-- Dumping data for table `forms`
+--
+
+INSERT INTO `forms` (`id`) VALUES
+('enter_deceased'),
+('enter_missing');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `form_attributes`
+--
+
+CREATE TABLE "form_attributes" ;
+
+--
+-- Truncate table before insert `form_attributes`
+--
+
+TRUNCATE TABLE `form_attributes`;
+--
+-- Dumping data for table `form_attributes`
+--
+
+INSERT INTO `form_attributes` (`form`, `attribute`, `display_sequence`, `hide_on_entry`) VALUES
+('enter_deceased', 'aliases', 230, 0),
+('enter_deceased', 'birth_year', 110, 0),
+('enter_deceased', 'birth_year_accuracy', 120, 0),
+('enter_deceased', 'case_id', 300, 1),
+('enter_deceased', 'case_status', 310, 1),
+('enter_deceased', 'chosen_name', 10, 0),
+('enter_deceased', 'contact_if_found', 260, 0),
+('enter_deceased', 'date_calendar_type', 30, 0),
+('enter_deceased', 'entered_by', 270, 1),
+('enter_deceased', 'entered_on_date', 280, 1),
+('enter_deceased', 'ethnicity', 210, 0),
+('enter_deceased', 'eye_color', 170, 0),
+('enter_deceased', 'eye_color_std', 180, 0),
+('enter_deceased', 'found_on_date', 60, 0),
+('enter_deceased', 'found_on_date_accuracy', 70, 0),
+('enter_deceased', 'given_name', 220, 0),
+('enter_deceased', 'hair_color', 190, 0),
+('enter_deceased', 'hair_color_std', 200, 0),
+('enter_deceased', 'height', 130, 0),
+('enter_deceased', 'height_unit', 140, 0),
+('enter_deceased', 'identifying_features', 240, 0),
+('enter_deceased', 'last_modified_by', 320, 1),
+('enter_deceased', 'last_modified_on_date', 330, 1),
+('enter_deceased', 'last_seen_activity', 90, 0),
+('enter_deceased', 'last_seen_alive_date_acc', 50, 0),
+('enter_deceased', 'last_seen_alive_on_date', 40, 0),
+('enter_deceased', 'last_seen_at_location', 80, 0),
+('enter_deceased', 'last_seen_wearing', 100, 0),
+('enter_deceased', 'other_notes', 250, 0),
+('enter_deceased', 'posters_generated_on', 290, 1),
+('enter_deceased', 'pronouns', 20, 0),
+('enter_deceased', 'weight', 150, 0),
+('enter_deceased', 'weight_unit', 160, 0),
+('enter_missing', 'aliases', 210, 0),
+('enter_missing', 'birth_year', 90, 0),
+('enter_missing', 'birth_year_accuracy', 100, 0),
+('enter_missing', 'case_id', 290, 1),
+('enter_missing', 'case_status', 300, 1),
+('enter_missing', 'chosen_name', 10, 0),
+('enter_missing', 'contact_if_found', 250, 0),
+('enter_missing', 'date_calendar_type', 30, 0),
+('enter_missing', 'disappear_circumstances', 230, 0),
+('enter_missing', 'entered_by', 260, 1),
+('enter_missing', 'entered_on_date', 270, 1),
+('enter_missing', 'ethnicity', 190, 0),
+('enter_missing', 'eye_color', 150, 0),
+('enter_missing', 'eye_color_std', 160, 0),
+('enter_missing', 'given_name', 200, 0),
+('enter_missing', 'hair_color', 170, 0),
+('enter_missing', 'hair_color_std', 180, 0),
+('enter_missing', 'height', 110, 0),
+('enter_missing', 'height_unit', 120, 0),
+('enter_missing', 'identifying_features', 220, 0),
+('enter_missing', 'last_modified_by', 310, 1),
+('enter_missing', 'last_modified_on_date', 320, 1),
+('enter_missing', 'last_seen_activity', 70, 0),
+('enter_missing', 'last_seen_at_location', 60, 0),
+('enter_missing', 'last_seen_date_accuracy', 50, 0),
+('enter_missing', 'last_seen_on_date', 40, 0),
+('enter_missing', 'last_seen_wearing', 80, 0),
+('enter_missing', 'other_notes', 240, 0),
+('enter_missing', 'posters_generated_on', 280, 1),
+('enter_missing', 'pronouns', 20, 0),
+('enter_missing', 'weight', 130, 0),
+('enter_missing', 'weight_unit', 140, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `images`
+--
+
+CREATE TABLE "images" ;
+
+--
+-- Truncate table before insert `images`
+--
+
+TRUNCATE TABLE `images`;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `integer_values`
+--
+
+CREATE TABLE "integer_values" ;
+
+--
+-- Truncate table before insert `integer_values`
+--
+
+TRUNCATE TABLE `integer_values`;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `language_codes`
+--
+
+CREATE TABLE "language_codes" ;
+
+--
+-- Truncate table before insert `language_codes`
+--
+
+TRUNCATE TABLE `language_codes`;
+--
+-- Dumping data for table `language_codes`
+--
+
+INSERT INTO `language_codes` (`code`) VALUES
+('de'),
+('en'),
+('fr'),
+('nl');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `longtext_values`
+--
+
+CREATE TABLE "longtext_values" ;
+
+--
+-- Truncate table before insert `longtext_values`
+--
+
+TRUNCATE TABLE `longtext_values`;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `profiles`
+--
+
+CREATE TABLE "profiles" ;
+
+--
+-- Truncate table before insert `profiles`
+--
+
+TRUNCATE TABLE `profiles`;
+--
+-- Dumping data for table `profiles`
+--
+
+INSERT INTO `profiles` (`case_id`) VALUES
+(1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shorttext_values`
+--
+
+CREATE TABLE "shorttext_values" ;
+
+--
+-- Truncate table before insert `shorttext_values`
+--
+
+TRUNCATE TABLE `shorttext_values`;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `time_values`
+--
+
+CREATE TABLE "time_values" ;
+
+--
+-- Truncate table before insert `time_values`
+--
+
+TRUNCATE TABLE `time_values`;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE "users" ;
+
+--
+-- Truncate table before insert `users`
+--
+
+TRUNCATE TABLE `users`;
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`seq`, `email_hash`, `display_name`, `access_requested_on`, `access_approved_on`, `key_hash`, `secret_hash`, `hashing_algo`, `hashing_version`, `last_hashed_date`, `reset_key`, `reset_key_date`) VALUES
+(5, '2213120b240573dbc209f7c49ec522f87547084179be87e12d06891276f91127468598649e9c86f1efb5e80f65ef50b86980a3505001f992bacf95d6929dc05d', NULL, '2023-10-14', NULL, '363f38ff73db62541bdffccb7b2af662c4e6687ab03896b45a047c501bfe30e03dc6d73c65227cf05bf20e77ceece3c6e73cedac37a159676a7d22b580ef4ad8', '02fb3892ed21f19f2a795b6e36186693b1c17e815bac0704ac1094b6d13873eb3f5802da3a924d64e2e9da170e831886f250c4b0364749fd9831d6cc0248dde5', 'sha512', '1', '2023-10-14', NULL, NULL),
+(6, 'c4230a4ddc55adf7c7bca2741658e152a693e959444632f7d73d51092b0749c68fafd30d15434f4d21739f8c559636d8acc7ddd77db31a3601179db631636a2f', NULL, '2023-10-15', NULL, '019d2d2ad4a79e5129a12af50ed01e1801046ca0035194f3eba7b32dcb798625c7a9cf21aa237abad5f3a2006a6f72b21b80af5ed90ed3a72483e06b2ac9cff9', '0ca7531c5b2d36497463ecef27bfebd40e84bb4fa26dfe2d599044bd1f1eeee67ec1ecb4f3f934c1e23e256cafda01a0be2ae0e0662376425b6056319238632c', 'sha512', '1', '2023-10-15', NULL, NULL),
+(7, 'c279a060a6e6c3d8b05ca9b4d604cd7d977181efc1086f75075de771574df0496d01d69a90533a032aa441d19c760ce96fffc40622b2664734c123aea3e31427', NULL, '2023-10-25', NULL, 'b0c3e34ae3d71693106de0c96d00a281a6a65172b7ad1fa9ce075b15dc36abec94df4cb013dd0c4af127a03f66589f2fa8c56a8b3dd98879a6099b29f90b9b49', 'd101e7732c6e4d49ef6394ceb0a1ceb8fedf980b2ee3abe26f65bd6eab15f2f78de64eb75611865780a4f05ef3e43c933864142263cd54184616b44002e96cc9', 'sha512', '1', '2023-10-25', NULL, NULL),
+(8, 'de141067f51af20bbbf8fd48367f19140181ad21637da6c3493404f477e4753f5d8114e5d6aa4bf938a142472caeef450014982ea238d5e83770abb28eca3b14', NULL, '2023-10-26', NULL, '0ac3872c36286a848bad65cff03b51d4eb6f5956289c37c96559daf021b1ad5259c083dd6f40d91ea05ea8182f44447f2810248eee315e6f381d01c0edcdfe1b', '852f70eee47b5f35a8bb187d73734b06558d7a42ceabb1cd1060775bf26d2ec967a5a1d061d22216ce87ce0cfd53c457a91a7137db65a561fc872ea56ffad4ce', 'sha512', '1', '2023-10-26', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_events`
+--
+
+CREATE TABLE "user_events" ;
+
+--
+-- Truncate table before insert `user_events`
+--
+
+TRUNCATE TABLE `user_events`;
+--
+-- Dumping data for table `user_events`
+--
+
+INSERT INTO `user_events` (`seq`, `user`, `event`, `at`) VALUES
+(1, 5, 1, '2023-10-24 21:31:17'),
+(2, 5, 1, '2023-10-25 21:53:27'),
+(3, 7, 2, '2023-10-25 23:59:16'),
+(4, 8, 2, '2023-10-26 00:01:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_privileges`
+--
+
+CREATE TABLE "user_privileges" ;
+
+--
+-- Truncate table before insert `user_privileges`
+--
+
+TRUNCATE TABLE `user_privileges`;
+--
+-- Dumping data for table `user_privileges`
+--
+
+INSERT INTO `user_privileges` (`seq`, `name`) VALUES
+(2, 'may_accept_access_applications'),
+(10, 'may_assign_case'),
+(12, 'may_assign_role_privileges'),
+(11, 'may_assign_user_roles'),
+(13, 'may_change_all_cases'),
+(6, 'may_change_own_case'),
+(4, 'may_enter_case'),
+(15, 'may_export_all_cases'),
+(7, 'may_export_own_case'),
+(3, 'may_reject_access_applications'),
+(1, 'may_see_access_applications'),
+(14, 'may_see_all_cases'),
+(8, 'may_see_own_case'),
+(9, 'may_self_assign_case'),
+(16, 'may_track_all_case_changes'),
+(5, 'may_track_own_case_changes');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_roles`
+--
+
+CREATE TABLE "user_roles" ;
+
+--
+-- Truncate table before insert `user_roles`
+--
+
+TRUNCATE TABLE `user_roles`;
+--
+-- Dumping data for table `user_roles`
+--
+
+INSERT INTO `user_roles` (`seq`, `name`) VALUES
+(4, 'all_case_editor'),
+(5, 'all_case_viewer'),
+(3, 'case_manager'),
+(1, 'dbo'),
+(6, 'own_case_editor'),
+(7, 'own_case_viewer'),
+(2, 'user_administrator');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_role_privileges`
+--
+
+CREATE TABLE "user_role_privileges" ;
+
+--
+-- Truncate table before insert `user_role_privileges`
+--
+
+TRUNCATE TABLE `user_role_privileges`;
+--
+-- Dumping data for table `user_role_privileges`
+--
+
+INSERT INTO `user_role_privileges` (`role`, `privilege`) VALUES
+(1, 11),
+(1, 12),
+(2, 1),
+(2, 2),
+(2, 3),
+(3, 9),
+(3, 10),
+(3, 13),
+(3, 14),
+(3, 15),
+(3, 16),
+(4, 9),
+(4, 13),
+(4, 14),
+(4, 15),
+(4, 16),
+(5, 14),
+(5, 15),
+(5, 16),
+(6, 4),
+(6, 5),
+(6, 6),
+(6, 7),
+(7, 5),
+(7, 7),
+(7, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_role_users`
+--
+
+CREATE TABLE "user_role_users" ;
+
+--
+-- Truncate table before insert `user_role_users`
+--
+
+TRUNCATE TABLE `user_role_users`;
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vw_missing_entry_form_attributes_en`
+-- (See below for the actual view)
+--
+CREATE TABLE `vw_missing_entry_form_attributes_en` (
+`id` char(24)
+,`data_type` enum('integer','shorttext','longtext','date','time','enum','percent')
+,`caption` text
+,`hint` tinytext
+,`min` int(11)
+,`max` int(11)
+,`hide_on_entry` tinyint(1)
+,`display_sequence` smallint(5) unsigned
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_missing_entry_form_attributes_en`
+--
+DROP TABLE IF EXISTS `vw_missing_entry_form_attributes_en`;
+
+CREATE VIEW "vw_missing_entry_form_attributes_en"  AS  select "a"."id" AS "id","a"."data_type" AS "data_type","t"."translation" AS "caption","t"."hint" AS "hint","a"."min" AS "min","a"."max" AS "max","f"."hide_on_entry" AS "hide_on_entry","f"."display_sequence" AS "display_sequence" from (("attributes" "a" join "form_attributes" "f" on((("f"."attribute" = "a"."id") and ("f"."form" = 'enter_missing')))) join "attribute_translations" "t" on(("t"."attribute_id" = "a"."id"))) where ("t"."language_code" = 'en') order by "f"."display_sequence" ;
