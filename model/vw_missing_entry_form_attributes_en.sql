@@ -1,17 +1,1 @@
-create view `vw_missing_entry_form_attributes` as 
-    SELECT a.`id`,
-           a.`data_type`, 
-           t.`translation` as `caption`, 
-           t.`hint`,
-           a.`min`,
-           a.`max`,
-           f.`hide_on_entry`,
-           f.`display_sequence`
-      FROM `attributes` as a 
-     inner join `form_attributes` as f
-        on f.`attribute` = a.id
-       and f.`form` = 'enter_missing'
-     inner join `attribute_translations` as t 
-        on t.`attribute_id` = a.`id` 
-     where t.`language_code` = 'en'
-     order by f.`display_sequence` asc;
+CREATE VIEW "vw_missing_entry_form_attributes_en"  AS  select "a"."id" AS "id","a"."data_type" AS "data_type","t"."translation" AS "caption","t"."hint" AS "hint","a"."min" AS "min","a"."max" AS "max","a"."is_write_once" AS "is_write_once","a"."default" AS "default","f"."display_sequence" AS "display_sequence" from (("attributes" "a" join "form_attributes" "f" on((("f"."attribute" = "a"."id") and ("f"."form" = 'enter_missing')))) join "attribute_translations" "t" on(("t"."attribute_id" = "a"."id"))) where (("t"."language_code" = 'en') and ("f"."hide_on_entry" = 0)) order by "f"."display_sequence" ;

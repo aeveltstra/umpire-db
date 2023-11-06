@@ -1,5 +1,4 @@
-INSERT INTO `form_attributes` 
-(`form`, `attribute`, `display_sequence`, `hide_on_entry`) VALUES
+INSERT INTO `form_attributes` (`form`, `attribute`, `display_sequence`, `hide_on_entry`) VALUES
 ('enter_deceased', 'aliases', 230, 0),
 ('enter_deceased', 'birth_year', 110, 0),
 ('enter_deceased', 'birth_year_accuracy', 120, 0),

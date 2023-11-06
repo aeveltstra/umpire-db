@@ -1,25 +1,65 @@
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'aliases',`translation` = 'Other Names',`hint` = 'Nick names, pen names, artist names, social media handles, etc.' WHERE `language_code` = 'en' AND `attribute_id` = 'aliases';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'birth_year',`translation` = 'Birth Year',`hint` = 'The year in which this person was born. Get as close as possible.' WHERE `language_code` = 'en' AND `attribute_id` = 'birth_year';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'birth_year_accuracy',`translation` = 'Birth Year Accuracy (%)',`hint` = 'How certain you are about the birth year. Percentage, from 0 (not certain) to 100 (completely certain).' WHERE `language_code` = 'en' AND `attribute_id` = 'birth_year_accuracy';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'case_id',`translation` = 'Case ID',`hint` = 'Created and assigned by the entry process automatically. No need to enter this.' WHERE `language_code` = 'en' AND `attribute_id` = 'case_id';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'case_status',`translation` = 'Case Status',`hint` = 'Pick a status from the available ones.' WHERE `language_code` = 'en' AND `attribute_id` = 'case_status';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'chosen_name',`translation` = 'Chosen Name',`hint` = 'The name this person uses for themselves, normally.' WHERE `language_code` = 'en' AND `attribute_id` = 'chosen_name';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'contact_if_found',`translation` = 'Contact if Found',`hint` = 'Name, reason, phone, email address, or any other way of informing someone who needs to be notified.' WHERE `language_code` = 'en' AND `attribute_id` = 'contact_if_found';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'date_calendar_type',`translation` = 'Calendar Type for Dates',`hint` = 'Probably Gregorian unless you live in the Middle East or Asia. Pick one from the list.' WHERE `language_code` = 'en' AND `attribute_id` = 'date_calendar_type';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'disappear_circumstances',`translation` = 'Disappearance Circumstances',`hint` = '' WHERE `language_code` = 'en' AND `attribute_id` = 'disappear_circumstances';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'entered_by',`translation` = 'Entered By',`hint` = '' WHERE `language_code` = 'en' AND `attribute_id` = 'entered_by';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'entered_on_date',`translation` = 'Entered On (Date)',`hint` = '' WHERE `language_code` = 'en' AND `attribute_id` = 'entered_on_date';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'ethnicity',`translation` = 'Ethnicity',`hint` = '' WHERE `language_code` = 'en' AND `attribute_id` = 'ethnicity';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'eye_color',`translation` = 'Eye Color',`hint` = '' WHERE `language_code` = 'en' AND `attribute_id` = 'eye_color';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'eye_color_std',`translation` = 'Standard Eye Color',`hint` = '' WHERE `language_code` = 'en' AND `attribute_id` = 'eye_color_std';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'given_name',`translation` = 'Given Name / Government Name',`hint` = '' WHERE `language_code` = 'en' AND `attribute_id` = 'given_name';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'hair_color',`translation` = 'Hair Color',`hint` = '' WHERE `language_code` = 'en' AND `attribute_id` = 'hair_color';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'hair_color_std',`translation` = 'Standard Hair Color',`hint` = '' WHERE `language_code` = 'en' AND `attribute_id` = 'hair_color_std';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'height',`translation` = 'Height',`hint` = '' WHERE `language_code` = 'en' AND `attribute_id` = 'height';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'height_unit',`translation` = 'Height Unit of Measurement',`hint` = '' WHERE `language_code` = 'en' AND `attribute_id` = 'height_unit';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'identifying_features',`translation` = 'Identifying Features',`hint` = '' WHERE `language_code` = 'en' AND `attribute_id` = 'identifying_features';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'last_modified_by',`translation` = 'Last Modified By',`hint` = '' WHERE `language_code` = 'en' AND `attribute_id` = 'last_modified_by';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'last_modified_on_date',`translation` = 'Last Modified On (Date)',`hint` = '' WHERE `language_code` = 'en' AND `attribute_id` = 'last_modified_on_date';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'last_seen_activity',`translation` = 'Activity when Last Seen',`hint` = '' WHERE `language_code` = 'en' AND `attribute_id` = 'last_seen_activity';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'last_seen_at_location',`translation` = 'Last Seen At (Location)',`hint` = '' WHERE `language_code` = 'en' AND `attribute_id` = 'last_seen_at_location';
-UPDATE `attribute_translations` SET `language_code` = 'en',`attribute_id` = 'last_seen_date_accuracy',`translation` = 'Accuracy of Date Last Seen (%)',`hint` = '' WHERE `language_code` = 'en' AND `attribute_id` = 'last_seen_date_accuracy';
+INSERT INTO `attribute_translations` (`language_code`, `attribute_id`, `translation`, `hint`) VALUES
+('en', 'aliases', 'Other Names', ''),
+('en', 'birth_year', 'Birth Year', ''),
+('en', 'birth_year_accuracy', 'Birth Year Accuracy (%)', ''),
+('en', 'case_id', 'Case ID', ''),
+('en', 'case_status', 'Case Status', ''),
+('en', 'chosen_name', 'Chosen Name', ''),
+('en', 'contact_if_found', 'Contact if Found', ''),
+('en', 'date_calendar_type', 'Calendar Type for Dates', ''),
+('en', 'disappear_circumstances', 'Disappearance Circumstances', ''),
+('en', 'entered_by', 'Entered By', ''),
+('en', 'entered_on_date', 'Entered On (Date)', ''),
+('en', 'ethnicity', 'Ethnicity', ''),
+('en', 'eye_color', 'Eye Color', ''),
+('en', 'eye_color_std', 'Standard Eye Color', ''),
+('en', 'given_name', 'Given Name / Government Name', ''),
+('en', 'hair_color', 'Hair Color', ''),
+('en', 'hair_color_std', 'Standard Hair Color', ''),
+('en', 'height', 'Height', ''),
+('en', 'height_unit', 'Height Unit of Measurement', ''),
+('en', 'identifying_features', 'Identifying Features', ''),
+('en', 'last_modified_by', 'Last Modified By', ''),
+('en', 'last_modified_on_date', 'Last Modified On (Date)', ''),
+('en', 'last_seen_activity', 'Activity when Last Seen', ''),
+('en', 'last_seen_at_location', 'Last Seen At (Location)', ''),
+('en', 'last_seen_date_accuracy', 'Accuracy of Date Last Seen (%)', ''),
+('en', 'last_seen_on_date', 'Last Seen (Date)', ''),
+('en', 'last_seen_wearing', 'Last Seen Wearing', ''),
+('en', 'other_notes', 'Other Notes', ''),
+('en', 'posters_generated_on', 'Posters Generated On (Date)', ''),
+('en', 'pronouns', 'Pronouns', ''),
+('en', 'weight', 'Weight', ''),
+('en', 'weight_unit', 'Unit of Weight Measurement', ''),
+('nl', 'aliases', 'Andere namen', ''),
+('nl', 'birth_year', 'Geboortejaar', ''),
+('nl', 'birth_year_accuracy', 'Accuratesse van het geboortejaar (%)', ''),
+('nl', 'case_id', 'Zaaknummer', ''),
+('nl', 'case_status', 'Zaakstatus', ''),
+('nl', 'chosen_name', 'Gekozen Naam', ''),
+('nl', 'contact_if_found', 'Contact als gevonden', ''),
+('nl', 'date_calendar_type', 'Kalendertype voor Datums', ''),
+('nl', 'disappear_circumstances', 'Verdwijningsomstandigheden', ''),
+('nl', 'entered_by', 'Ingevoerd door', ''),
+('nl', 'entered_on_date', 'Ingevoerd op (datum)', ''),
+('nl', 'ethnicity', 'Etniciteit', ''),
+('nl', 'eye_color', 'Oogkleur', ''),
+('nl', 'eye_color_std', 'Standaard oogkleur', ''),
+('nl', 'given_name', 'Gegeven naam / Overheidsnaam', ''),
+('nl', 'hair_color', 'Haarkleur', ''),
+('nl', 'hair_color_std', 'Standaard haarkleur', ''),
+('nl', 'height', 'Lengte', ''),
+('nl', 'height_unit', 'Maateenheid voor Lengte', ''),
+('nl', 'identifying_features', 'Identificerende eigenschappen', ''),
+('nl', 'last_modified_by', 'Laatst bewerkt door', ''),
+('nl', 'last_modified_on_date', 'Laatst bewerkt op (datum)', ''),
+('nl', 'last_seen_activity', 'Activiteit terwijl laatst gezien', ''),
+('nl', 'last_seen_at_location', 'Laatst gezien op (locatie)', ''),
+('nl', 'last_seen_date_accuracy', 'Accuratesse van de laatst-gezien datum (%)', ''),
+('nl', 'last_seen_on_date', 'Laatst gezien op (datum)', ''),
+('nl', 'last_seen_wearing', 'Laatst gezien in kleding', ''),
+('nl', 'other_notes', 'Opmerkingen', ''),
+('nl', 'posters_generated_on', 'Posters aangemaakt op (datum)', ''),
+('nl', 'pronouns', 'Aanheffing', ''),
+('nl', 'weight', 'Gewicht', ''),
+('nl', 'weight_unit', 'Maateenheid voor Gewicht', '');
