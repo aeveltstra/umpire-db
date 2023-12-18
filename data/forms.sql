@@ -1,4 +1,4 @@
-insert into `forms` (`id`) 
-values 
-("enter_missing"),
-("enter_deceased");
+TRUNCATE TABLE `forms`;
+INSERT INTO `forms` (`id`) VALUES
+('enter_deceased'),
+('enter_missing');

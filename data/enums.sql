@@ -1,3 +1,4 @@
+TRUNCATE TABLE `enums`;
 INSERT INTO `enums` (`attribute_id`, `enum_value`, `language_code`, `caption`) VALUES
 ('case_status', 'solved', 'en', 'Solved'),
 ('case_status', 'unsolved', 'en', 'Unsolved'),
