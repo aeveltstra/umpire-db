@@ -1,0 +1,6 @@
+
+DROP TABLE IF EXISTS `forms`;
+CREATE TABLE `forms` (
+ `id` char(24) NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=ascii

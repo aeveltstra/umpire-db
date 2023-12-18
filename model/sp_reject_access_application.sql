@@ -1,3 +1,6 @@
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_reject_access_application`$$
 CREATE DEFINER=`van`@`10.%` PROCEDURE `sp_reject_access_application` (IN `caller_hash` CHAR(128) CHARSET utf8, IN `rejected_email_hash` CHAR(128) CHARSET utf8, OUT `success` BOOLEAN)  MODIFIES SQL DATA
 begin 
    declare rejected_user_int int(10) default null;
@@ -47,4 +50,4 @@ begin
    else
        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Denied: caller lacks user_admin privilege.';
    end if;
-END$$
+end$$

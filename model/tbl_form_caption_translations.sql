@@ -1,3 +1,5 @@
+
+DROP TABLE IF EXISTS `form_caption_translations`;
 CREATE TABLE `form_caption_translations` (
  `form` char(24) CHARACTER SET ascii NOT NULL,
  `language` varchar(24) CHARACTER SET ascii NOT NULL,

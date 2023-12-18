@@ -1,3 +1,6 @@
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_is_user_admin`$$
 CREATE DEFINER=`van`@`10.%` PROCEDURE `sp_is_user_admin` (IN `user_email_hash` CHAR(128) CHARSET utf8, OUT `result` BOOLEAN)  READS SQL DATA
     DETERMINISTIC
 BEGIN
