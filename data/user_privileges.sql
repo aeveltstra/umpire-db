@@ -4,7 +4,7 @@ INSERT INTO `user_privileges` (`seq`, `name`) VALUES
 (2, 'may_accept_access_applications'),
 (3, 'may_reject_access_applications'),
 (4, 'may_enter_case'),
-(5, 'may_track_own_case_changes');
+(5, 'may_track_own_case_changes'),
 (6, 'may_change_own_case'),
 (7, 'may_export_own_case'),
 (8, 'may_see_own_case'),
