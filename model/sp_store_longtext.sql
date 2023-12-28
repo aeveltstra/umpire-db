@@ -15,7 +15,7 @@ begin
             attribute_id,
             case_id,
             user_int,
-            new_value
+            nullif(trim(new_value), '')
         );
     end if;
 END$$
