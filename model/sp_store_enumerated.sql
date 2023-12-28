@@ -10,7 +10,7 @@ begin
         select seq into user_int from users where email_hash = user_email_hash;
     end if;
     if (user_int is not null) THEN
-        insert into enum_values (at, attribute_id, case_id, user, enum_id) values (
+        insert into enum_values (at, attribute_id, case_id, user, value) values (
             now(),
             attribute_id,
             case_id,

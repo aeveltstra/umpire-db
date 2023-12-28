@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS `shorttext_values`;
 CREATE TABLE `shorttext_values` (
  `attribute_id` char(24) NOT NULL,
  `case_id` bigint(20) NOT NULL,
- `value` tinytext NOT NULL,
+ `value` tinytext NULL,
  `user` int(10) unsigned NOT NULL,
  `at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
  PRIMARY KEY (`attribute_id`,`case_id`),

@@ -106,7 +106,7 @@ DROP TABLE IF EXISTS date_values;
 CREATE TABLE date_values (
   attribute_id char(24) NOT NULL,
   case_id bigint(20) NOT NULL,
-  value date NOT NULL,
+  value date NULL,
   user int(10) unsigned NOT NULL,
   at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (attribute_id,case_id,at) USING BTREE,
@@ -137,7 +137,7 @@ CREATE TABLE `enum_values` (
  `at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
  `attribute_id` char(24) NOT NULL,
  `case_id` bigint(20) NOT NULL,
- `enum_id` varchar(24) NOT NULL,
+ `value` varchar(24) NULL,
  `user` int(10) unsigned NOT NULL,
  PRIMARY KEY (`attribute_id`,`case_id`,`at`) USING BTREE,
  KEY `ix_enum_values_modified` (`at`),
@@ -180,7 +180,7 @@ DROP TABLE IF EXISTS integer_values;
 CREATE TABLE integer_values (
  attribute_id char(24) NOT NULL,
  case_id bigint(20) NOT NULL,
- value bigint(20) NOT NULL,
+ value bigint(20) NULL,
  user int(10) unsigned NOT NULL,
  at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
  PRIMARY KEY (attribute_id,case_id,at) USING BTREE,
@@ -196,7 +196,7 @@ DROP TABLE IF EXISTS longtext_values;
 CREATE TABLE longtext_values (
  attribute_id char(24) NOT NULL,
  case_id bigint(20) NOT NULL,
- value text NOT NULL,
+ value text NULL,
  user int(10) unsigned NOT NULL,
  at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
  PRIMARY KEY (attribute_id,case_id,at) USING BTREE,
@@ -212,7 +212,7 @@ DROP TABLE IF EXISTS shorttext_values;
 CREATE TABLE shorttext_values (
  attribute_id char(24) NOT NULL,
  case_id bigint(20) NOT NULL,
- value tinytext NOT NULL,
+ value tinytext NULL,
  user int(10) unsigned NOT NULL,
  at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
  PRIMARY KEY (attribute_id,case_id),
@@ -227,7 +227,7 @@ DROP TABLE IF EXISTS time_values;
 CREATE TABLE time_values (
  attribute_id char(24) NOT NULL,
  case_id bigint(20) NOT NULL,
- value time NOT NULL,
+ value time NULL,
  user int(10) unsigned NOT NULL,
  at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
  PRIMARY KEY (attribute_id,case_id),
