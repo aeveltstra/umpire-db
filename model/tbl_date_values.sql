@@ -1,4 +1,3 @@
-
 DROP TABLE IF EXISTS `date_values`;
 CREATE TABLE `date_values` (
   `attribute_id` char(24) NOT NULL,
