@@ -11,6 +11,6 @@ CREATE TABLE `longtext_values` (
  KEY `ix_longtext_values_user` (`user`) USING BTREE,
  KEY `ix_longtext_values_modified` (`at`) USING BTREE,
  FULLTEXT KEY `ix_longtext_values_fulltext` (`value`),
- CONSTRAINT `fk_4` FOREIGN KEY (`case_id`) REFERENCES `profiles` (`case_id`) ON DELETE CASCADE ON UPDATE CASCADE,
- CONSTRAINT `fk_8` FOREIGN KEY (`attribute_id`) REFERENCES `attributes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+ CONSTRAINT `fk_longtext_case` FOREIGN KEY (`case_id`) REFERENCES `profiles` (`case_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ CONSTRAINT `fk_longtext_attribute` FOREIGN KEY (`attribute_id`) REFERENCES `attributes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Huge values for text attributes. Think reports, DNA kits, family trees.'
