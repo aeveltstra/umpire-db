@@ -1,7 +1,7 @@
 
 DROP TABLE IF EXISTS `user_events`;
 CREATE TABLE `user_events` (
- `seq` int(10) unsigned NOT NULL AUTO_INCREMENT,
+ `seq` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
  `user` int(10) unsigned NOT NULL,
  `event` int(10) unsigned NOT NULL,
  `at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
