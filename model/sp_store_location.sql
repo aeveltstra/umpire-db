@@ -4,9 +4,15 @@ DROP PROCEDURE IF EXISTS `sp_store_location`$$
 CREATE DEFINER=`van`@`10.%` PROCEDURE `sp_store_location` (
     IN `case_id` BIGINT(20), 
     IN `attribute_id` CHAR(24) CHARSET utf8, 
-    IN `x` int,
-    IN `y` int,
-    IN `z` int,    
+    IN `x` smallint,
+    IN `x_decimals` mediumint,
+    IN `x_sign` tinyint,
+    IN `y` smallint,
+    IN `y_decimals` mediumint,
+    IN `y_sign` tinyint,
+    IN `z` smallint,
+    IN `z_decimals` mediumint,
+    IN `z_sign` tinyint,
     IN `user_email_hash` CHAR(128) CHARSET utf8
 )  MODIFIES SQL DATA
 begin
@@ -23,16 +29,28 @@ begin
             case_id, 
             user, 
             x,
+            x_decimals,
+            x_sign,
             y,
-            z
+            y_decimals,
+            y_sign,
+            z,
+            z_decimals,
+            z_sign
         ) values (
             now(),
             attribute_id,
             case_id,
             user_int,
             x,
+            x_decimals,
+            x_sign,
             y,
-            z
+            y_decimals,
+            y_sign,
+            z,
+            z_decimals,
+            z_sign
         );
     end if;
 END$$
