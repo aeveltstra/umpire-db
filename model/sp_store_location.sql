@@ -1,7 +1,7 @@
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `sp_store_location`$$
-CREATE DEFINER=`van`@`10.%` PROCEDURE `sp_store_location` (
+CREATE PROCEDURE `sp_store_location`(
     IN `case_id` BIGINT(20), 
     IN `attribute_id` CHAR(24) CHARSET utf8, 
     IN `x` smallint,
@@ -14,7 +14,7 @@ CREATE DEFINER=`van`@`10.%` PROCEDURE `sp_store_location` (
     IN `z_decimals` mediumint,
     IN `z_sign` tinyint,
     IN `user_email_hash` CHAR(128) CHARSET utf8
-)  MODIFIES SQL DATA
+)
 begin
     declare user_int int(10) default null;
     select seq into user_int from users where email_hash = user_email_hash;
@@ -54,3 +54,4 @@ begin
         );
     end if;
 END$$
+DELIMITER ;

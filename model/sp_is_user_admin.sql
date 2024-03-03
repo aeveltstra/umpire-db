@@ -1,10 +1,7 @@
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `sp_is_user_admin`$$
-CREATE DEFINER=`van`@`10.%` PROCEDURE `sp_is_user_admin` (
-        IN `user_email_hash` CHAR(128) CHARSET utf8, 
-        OUT `result` BOOLEAN
-)  READS SQL DATA DETERMINISTIC
+CREATE PROCEDURE `sp_is_user_admin`(IN `user_email_hash` CHAR(128) CHARSET utf8, OUT `result` BOOLEAN)
 BEGIN
 	DECLARE role_name varchar(48) default 'user_administrator';
     DECLARE role_sec char(10) default '';
@@ -26,3 +23,4 @@ BEGIN
 		   and `user_role_users`.`role` = role_sec;
 	end if;
 END$$
+DELIMITER ;

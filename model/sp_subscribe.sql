@@ -1,11 +1,12 @@
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `sp_subscribe`$$
-CREATE DEFINER=`van`@`10.%` PROCEDURE `sp_subscribe` (
+CREATE PROCEDURE `sp_subscribe`(
     IN `case_id` BIGINT(20), 
     IN `email` VARCHAR(256) CHARSET utf8,
     OUT `success` BOOLEAN
-)  begin
+)
+begin
     declare amount_existing int default 0;
     select 0 into success;
     select count(*) into amount_existing 
@@ -26,4 +27,4 @@ CREATE DEFINER=`van`@`10.%` PROCEDURE `sp_subscribe` (
         select 1 into success;
     end if;
 END$$
-
+DELIMITER ;

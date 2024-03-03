@@ -6,7 +6,8 @@ insert into `user_events` (`user`, `event`) values (user, event);
 END$$
 
 DROP PROCEDURE IF EXISTS `sp_log_user_event_by_value`$$
-CREATE DEFINER=`van`@`10.%` PROCEDURE `sp_log_user_event_by_value` (IN `user_email_hash` CHAR(128) CHARSET utf8, IN `event_name` VARCHAR(256) CHARSET utf8)  begin
+CREATE PROCEDURE `sp_log_user_event_by_value`(IN `user_email_hash` CHAR(128) CHARSET utf8, IN `event_name` VARCHAR(256) CHARSET utf8)
+begin
     declare user_int int(10) default null;
     declare event_int int(10) default null;
     select seq into user_int from users where email_hash = user_email_hash;
@@ -21,3 +22,4 @@ CREATE DEFINER=`van`@`10.%` PROCEDURE `sp_log_user_event_by_value` (IN `user_ema
         end if;
     end if;
 END$$
+DELIMITER ;

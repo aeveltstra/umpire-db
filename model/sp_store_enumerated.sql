@@ -1,7 +1,7 @@
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `sp_store_enumerated`$$
-CREATE DEFINER=`van`@`10.%` PROCEDURE `sp_store_enumerated` (IN `case_id` BIGINT(20), IN `attribute_id` CHAR(24) CHARSET utf8, IN `new_value` VARCHAR(24), IN `user_email_hash` CHAR(128) CHARSET utf8)  MODIFIES SQL DATA
+CREATE PROCEDURE `sp_store_enumerated`(IN `case_id` BIGINT(20), IN `attribute_id` CHAR(24) CHARSET utf8, IN `new_value` VARCHAR(24), IN `user_email_hash` CHAR(128) CHARSET utf8)
 begin
     declare user_int int(10) default null;
     select seq into user_int from users where email_hash = user_email_hash;
@@ -19,3 +19,4 @@ begin
         );
     end if;
 END$$
+DELIMITER ;

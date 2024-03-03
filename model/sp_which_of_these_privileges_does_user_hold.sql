@@ -1,7 +1,7 @@
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `sp_which_of_these_privileges_does_user_hold`$$
-CREATE DEFINER=`van`@`10.%` PROCEDURE `sp_which_of_these_privileges_does_user_hold` (IN `user_email_hash` CHAR(128) CHARSET utf8, IN `privileges_csv` VARCHAR(512) CHARSET utf8, OUT `found` VARCHAR(512) CHARSET utf8)  READS SQL DATA
+CREATE PROCEDURE `sp_which_of_these_privileges_does_user_hold`(IN `user_email_hash` CHAR(128) CHARSET utf8, IN `privileges_csv` VARCHAR(512) CHARSET utf8, OUT `found` VARCHAR(512) CHARSET utf8)
 BEGIN
 
 declare user_int int(10) unsigned default null;
@@ -30,5 +30,4 @@ else
     close privileges_ints;
 end if;
 END$$
-
 DELIMITER ;
