@@ -1,16 +1,8 @@
 TRUNCATE TABLE `enums`;
+
 INSERT INTO `enums` (`attribute_id`, `enum_value`, `language_code`, `caption`) VALUES
 ('case_status', 'solved', 'en', 'Solved'),
 ('case_status', 'unsolved', 'en', 'Unsolved'),
-('date_calendar_type', 'burmese', 'en', 'Burmese'),
-('date_calendar_type', 'gregorian', 'en', 'Gregorian: used most'),
-('date_calendar_type', 'hebrew', 'en', 'Hebrew'),
-('date_calendar_type', 'indian', 'en', 'Indian National'),
-('date_calendar_type', 'japanese', 'en', 'Japanese'),
-('date_calendar_type', 'lunar hijri', 'en', 'Lunar Hijri'),
-('date_calendar_type', 'solar hijri', 'en', 'Solar Hijri'),
-('date_calendar_type', 'thai', 'en', 'Thai'),
-('date_calendar_type', 'vikram savat', 'en', 'Indian Hindu'),
 ('ethnicity', '1', 'en', 'White'),
 ('ethnicity', '2', 'en', 'Black or African American'),
 ('ethnicity', '3', 'en', 'Hispanic or Latino'),

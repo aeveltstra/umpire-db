@@ -1,4 +1,5 @@
 TRUNCATE TABLE `form_attributes`;
+
 INSERT INTO `form_attributes` (`form`, `attribute`, `display_sequence`, `hide_on_entry`) VALUES
 ('enter_deceased', 'aliases', 230, 0),
 ('enter_deceased', 'birth_year', 110, 0),
@@ -6,7 +7,6 @@ INSERT INTO `form_attributes` (`form`, `attribute`, `display_sequence`, `hide_on
 ('enter_deceased', 'case_status', 310, 1),
 ('enter_deceased', 'chosen_name', 10, 0),
 ('enter_deceased', 'contact_if_found', 260, 0),
-('enter_deceased', 'date_calendar_type', 30, 0),
 ('enter_deceased', 'ethnicity', 210, 0),
 ('enter_deceased', 'eye_color', 170, 0),
 ('enter_deceased', 'eye_color_std', 180, 0),
@@ -26,15 +26,16 @@ INSERT INTO `form_attributes` (`form`, `attribute`, `display_sequence`, `hide_on
 ('enter_deceased', 'other_notes', 250, 0),
 ('enter_deceased', 'posters_generated_on', 290, 1),
 ('enter_deceased', 'pronouns', 20, 0),
+('enter_deceased', 'reference_code', 80, 0),
 ('enter_deceased', 'weight', 150, 0),
 ('enter_deceased', 'weight_unit', 160, 0),
+('enter_feedback', 'feedback_description', 10, 0),
 ('enter_missing', 'aliases', 210, 0),
 ('enter_missing', 'birth_year', 90, 0),
 ('enter_missing', 'birth_year_accuracy', 100, 0),
 ('enter_missing', 'case_status', 300, 1),
 ('enter_missing', 'chosen_name', 10, 0),
 ('enter_missing', 'contact_if_found', 250, 0),
-('enter_missing', 'date_calendar_type', 30, 0),
 ('enter_missing', 'disappear_circumstances', 230, 0),
 ('enter_missing', 'ethnicity', 190, 0),
 ('enter_missing', 'eye_color', 150, 0),
@@ -53,5 +54,7 @@ INSERT INTO `form_attributes` (`form`, `attribute`, `display_sequence`, `hide_on
 ('enter_missing', 'other_notes', 240, 0),
 ('enter_missing', 'posters_generated_on', 280, 1),
 ('enter_missing', 'pronouns', 20, 0),
+('enter_missing', 'reference_code', 80, 0),
 ('enter_missing', 'weight', 130, 0),
-('enter_missing', 'weight_unit', 140, 0);
+('enter_missing', 'weight_unit', 140, 0),
+('enter_subscription', 'subscription_email', 10, 0);
