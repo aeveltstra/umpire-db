@@ -1,7 +1,10 @@
 DELIMITER $$
 DROP PROCEDURE IF EXISTS `sp_accept_access_application`$$
-CREATE PROCEDURE `sp_accept_access_application`(IN `caller_hash` CHAR(128) CHARSET utf8, IN `accepted_email_hash` CHAR(128) CHARSET utf8, OUT `success` BOOLEAN)
-begin 
+CREATE PROCEDURE `sp_accept_access_application`(
+  IN `caller_hash` CHAR(128) CHARSET utf8, 
+  IN `accepted_email_hash` CHAR(128) CHARSET utf8, 
+  OUT `success` BOOLEAN
+) begin 
    declare accepted_user_int int(10) default null;
    declare role_view_own_cases int(10) default null;
    declare is_caller_user_admin bool default false;
@@ -19,12 +22,15 @@ begin
        select `seq` into accepted_user_int from `users`
          where `email_hash` = accepted_email_hash;
        if (accepted_user_int is not null) THEN
-           select `seq` into role_view_own_cases from `user_roles`
-             where `name` = 'own_case_viewer';
+           select `seq` into role_view_own_cases 
+              from `user_roles`
+              where `name` = 'own_case_viewer';
            if (role_view_own_cases is null) then
-             insert into `user_roles` (name) values ('own_case_viewer');
-             select `seq` into role_view_own_cases from `user_roles`
-               where `name` = 'own_case_viewer';          
+             insert into `user_roles` (name) 
+             values ('own_case_viewer');
+             select `seq` into role_view_own_cases 
+             from `user_roles`
+             where `name` = 'own_case_viewer';          
            end if;
            select count(*) into amount_of_already_assigned from `user_role_users`
                where `role` = role_view_own_cases
