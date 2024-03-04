@@ -2,7 +2,7 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `sp_assign_first_case_users`$$
 CREATE PROCEDURE `sp_assign_first_case_users`(
-    IN `case_id` BIGINT(20),
+    IN `entry_id` BIGINT(20),
     IN `user_email_hash` CHAR(128) CHARSET utf8
 ) begin
     declare user_int int(10) default null;
@@ -59,18 +59,18 @@ CREATE PROCEDURE `sp_assign_first_case_users`(
             role_view_own_cases,
             user_int
         );
-        insert into `cases_roles` (
-            `case`,
+        insert into `entries_roles` (
+            `entry`,
             `role`
         ) values (
-            case_id,
+            entry_id,
             role_view_own_cases
         );
-        insert into `cases_roles` (
-            `case`,
+        insert into `entries_roles` (
+            `entry`,
             `role`
         ) values (
-            case_id,
+            entry_id,
             role_case_manager
         );
         commit;
