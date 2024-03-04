@@ -13,8 +13,7 @@ begin
     declare user_int int(10) default null;
     select seq into user_int from users where email_hash = user_email_hash;
     if (user_int is null) then
-        insert into users (display_name, email_hash, access_requested_on) 
-        values ('Anonymous', user_email_hash, now());
+        call sp_add_anonymous_user(user_email_hash); 
         select seq into user_int from users 
         where email_hash = user_email_hash;
     end if;
