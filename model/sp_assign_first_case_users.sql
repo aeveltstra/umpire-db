@@ -20,10 +20,8 @@ CREATE PROCEDURE `sp_assign_first_case_users`(
     from users 
     where email_hash = user_email_hash;
     if (user_int is null) THEN
-        call sp_add_anonymous_user(user_email_hash);
-        select seq into user_int 
-        from users 
-        where email_hash = user_email_hash;
+        call sp_add_anonymous_user(user_email_hash, @new_user_id); 
+        select @new_user_id into user_int;
         if (user_int is null) THEN
             SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Impossible: failed to add anonymous user.';
         end if;
