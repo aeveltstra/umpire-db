@@ -19,7 +19,8 @@ CREATE PROCEDURE `sp_accept_access_application`(
     select false into success;
     call `sp_is_user_admin`(caller_hash, is_caller_user_admin);
     if (1 = is_caller_user_admin) then
-        select `seq` into accepted_user_int from `users`
+        select `seq` into accepted_user_int 
+        from `users`
         where `email_hash` = accepted_email_hash;
         if (accepted_user_int is not null) THEN
             select `seq` into role_view_own_cases 
@@ -32,7 +33,8 @@ CREATE PROCEDURE `sp_accept_access_application`(
                 from `user_roles`
                 where `name` = 'own_case_viewer';          
             end if;
-            select count(*) into amount_of_already_assigned from `user_role_users`
+            select count(*) into amount_of_already_assigned 
+            from `user_role_users`
             where `role` = role_view_own_cases
             and `user` = accepted_user_int;
             if (0 < amount_of_already_assigned) THEN

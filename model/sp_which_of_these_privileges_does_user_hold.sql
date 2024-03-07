@@ -1,7 +1,11 @@
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `sp_which_of_these_privileges_does_user_hold`$$
-CREATE PROCEDURE `sp_which_of_these_privileges_does_user_hold`(IN `user_email_hash` CHAR(128) CHARSET utf8, IN `privileges_csv` VARCHAR(512) CHARSET utf8, OUT `found` VARCHAR(512) CHARSET utf8)
+CREATE PROCEDURE `sp_which_of_these_privileges_does_user_hold`(
+    IN `user_email_hash` CHAR(128) CHARSET utf8, 
+    IN `privileges_csv` VARCHAR(512) CHARSET utf8, 
+    OUT `found` VARCHAR(512) CHARSET utf8
+)
 BEGIN
 
 declare user_int int(10) unsigned default null;
@@ -11,7 +15,9 @@ DECLARE done INT DEFAULT FALSE;
 declare privileges_ints cursor for select `seq` from `user_privileges`;
 DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
-select `seq` into user_int from `users` where `users`.`email_hash` = user_email_hash;
+select `seq` into user_int 
+from `users` 
+where `users`.`email_hash` = user_email_hash;
 if (user_int is null) THEN
     select null into found;
 else
