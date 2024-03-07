@@ -18,9 +18,8 @@ CREATE PROCEDURE `sp_store_location`(
     declare user_int int(10) default null;
     select seq into user_int from users where email_hash = user_email_hash;
     if (user_int is null) then
-        call sp_add_anonymous_user(user_email_hash); 
-        select seq into user_int from users 
-        where email_hash = user_email_hash;
+        call sp_add_anonymous_user(user_email_hash, @new_user_id); 
+        select @new_user_id into user_int;
     end if;
     if (user_int is not null) THEN
         insert into location_values (
