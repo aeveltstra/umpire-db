@@ -1,8 +1,6 @@
 DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `sp_assign_first_case_users`$$
 CREATE PROCEDURE `sp_assign_first_case_users`(
-    IN `entry_id` BIGINT(20),
+    IN `entry_id` BIGINT(20), 
     IN `user_email_hash` CHAR(128) CHARSET utf8
 ) begin
     declare user_int int(10) default null;
@@ -53,24 +51,36 @@ CREATE PROCEDURE `sp_assign_first_case_users`(
         insert into `user_role_users` (
             `role`,
             `user`
-        ) values (
-            role_view_own_cases,
-            user_int
-        );
+        ) select * from (select
+            role_view_own_cases as `role`,
+            user_int as `user`
+        ) as new_value where not exists (
+            select 1 from `user_role_users`
+            where `role` = role_view_own_cases
+            and `user` = user_int
+        ) limit 1;
         insert into `entries_roles` (
             `entry`,
             `role`
-        ) values (
-            entry_id,
-            role_view_own_cases
-        );
+        ) select * from (select 
+            entry_id as `entry`,
+            role_view_own_cases as `role`
+        ) as new_value where not exists (
+            select 1 from `entries_roles`
+            where `role` = role_view_own_cases
+            and `entry` = entry_id
+        ) limit 1;
         insert into `entries_roles` (
             `entry`,
             `role`
-        ) values (
-            entry_id,
-            role_case_manager
-        );
+        ) select * from (select 
+            entry_id as `entry`,
+            role_case_manager as `role`
+        ) as new_value where not exists (
+            select 1 from `entries_roles`
+            where `role` = role_case_manager
+            and `entry` = entry_id
+        ) limit 1;
         commit;
     end if;
 END$$
