@@ -10,7 +10,7 @@ CREATE TABLE `time_values` (
 
 ALTER TABLE `time_values`
   ADD PRIMARY KEY (`attribute_id`,`case_id`),
-  ADD KEY `value` (`value`),
+  ADD KEY `ix_time_value` (`value`),
   ADD KEY `ix_times_modified` (`at`) USING BTREE,
   ADD KEY `ix_times_attribute` (`attribute_id`),
   ADD KEY `ix_times_case` (`case_id`) USING BTREE,
