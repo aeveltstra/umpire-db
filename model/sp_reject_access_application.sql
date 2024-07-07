@@ -1,7 +1,11 @@
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS `sp_reject_access_application`$$
-CREATE PROCEDURE `sp_reject_access_application`(IN `caller_hash` CHAR(128) CHARSET utf8, IN `rejected_email_hash` CHAR(128) CHARSET utf8, OUT `success` BOOLEAN)
+CREATE PROCEDURE `sp_reject_access_application`(
+  IN `caller_hash` CHAR(128) CHARSET utf8, 
+  IN `rejected_email_hash` CHAR(128) CHARSET utf8, 
+  OUT `success` BOOLEAN
+)
 begin 
    declare rejected_user_int int(10) default null;
    declare role_view_own_cases int(10) default null;
