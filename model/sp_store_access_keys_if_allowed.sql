@@ -6,9 +6,13 @@ CREATE PROCEDURE `sp_store_access_keys_if_allowed`(
     IN `new_key_hash` char(128) CHARSET utf8,
     IN `new_secret_hash` char(128) CHARSET utf8
 ) begin 
-
-    set @test1 = call sp_may_user_reset_own_authentication(challenger_email_hash);
-    set @test2 = call sp_may_user_access_keys_get_set(challenger_email_hash);
+    set @test1 = 0;
+    set @test2 = 0;
+    set @test3 = 0;
+    set @all_passed = 0;
+    
+    set @test1 = sp_may_user_reset_own_authentication(challenger_email_hash);
+    set @test2 = sp_may_user_access_keys_get_set(challenger_email_hash);
     select 1 into @test3 from `users` 
         where `email_hash` = challenger_email_hash
         and `reset_key` = challenger_reset_key
@@ -26,7 +30,7 @@ CREATE PROCEDURE `sp_store_access_keys_if_allowed`(
             `reset_key` = null,
             `reset_key_date` = null
         where `email_hash` = challenger_email_hash
-        and `reset_key` = `challenger_reset_key`;
+        and `reset_key` = challenger_reset_key;
         select 1 as got_stored;
     else
         select 0 as got_stored;
