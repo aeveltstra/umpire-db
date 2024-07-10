@@ -1,9 +1,6 @@
 DELIMITER $$
-DROP PROCEDURE IF EXISTS `sp_may_user_access_keys_get_set`$$
-CREATE PROCEDURE `sp_may_user_access_keys_get_set`(
-    IN  `user_email_hash` CHAR(128) CHARSET utf8
-) begin
-
+CREATE DEFINER=`van`@`10.%` PROCEDURE `sp_may_user_access_keys_get_set`(IN `user_email_hash` CHAR(128) CHARSET utf8, OUT `is_allowed` INT)
+begin
     declare is_less_than_3_per_hour int(1) default 0;
     declare is_longer_than_1_minute_ago int(1) default 0;
     declare user_int int(10) default null;
@@ -39,6 +36,8 @@ CREATE PROCEDURE `sp_may_user_access_keys_get_set`(
     select (is_less_than_3_per_hour = 1) 
         and (is_longer_than_1_minute_ago = 1) 
         and user_int is not null
-        as is_allowed;
+        into is_allowed;
+
+    select is_allowed;
 end$$
 DELIMITER ;

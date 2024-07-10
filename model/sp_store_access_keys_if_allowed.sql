@@ -1,18 +1,14 @@
 DELIMITER $$
-DROP PROCEDURE IF EXISTS `sp_store_access_keys_if_allowed`$$
-CREATE PROCEDURE `sp_store_access_keys_if_allowed`(
-    IN `challenger_email_hash` CHAR(128) CHARSET utf8,
-    IN `challenger_reset_key` char(128) CHARSET utf8,
-    IN `new_key_hash` char(128) CHARSET utf8,
-    IN `new_secret_hash` char(128) CHARSET utf8
-) begin 
+CREATE DEFINER=`van`@`10.%` PROCEDURE `sp_store_access_keys_if_allowed`(IN `challenger_email_hash` CHAR(128) CHARSET utf8, IN `challenger_reset_key` CHAR(128) CHARSET utf8, IN `new_key_hash` CHAR(128) CHARSET utf8, IN `new_secret_hash` CHAR(128) CHARSET utf8)
+    MODIFIES SQL DATA
+begin 
     set @test1 = 0;
     set @test2 = 0;
     set @test3 = 0;
     set @all_passed = 0;
     
-    set @test1 = sp_may_user_reset_own_authentication(challenger_email_hash);
-    set @test2 = sp_may_user_access_keys_get_set(challenger_email_hash);
+    call sp_may_user_reset_own_authentication(challenger_email_hash, @test1);
+    call sp_may_user_access_keys_get_set(challenger_email_hash, @test2);
     select 1 into @test3 from `users` 
         where `email_hash` = challenger_email_hash
         and `reset_key` = challenger_reset_key
