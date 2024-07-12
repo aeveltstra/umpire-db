@@ -7,7 +7,7 @@ begin
     set @test3 = 0;
     set @all_passed = 0;
     
-    call sp_may_user_reset_own_authentication(challenger_email_hash, @test1);
+    call sp_may_user_reset_own_authentication_2(challenger_email_hash, @test1);
     call sp_may_user_access_keys_get_set(challenger_email_hash, @test2);
     select 1 into @test3 from `users` 
         where `email_hash` = challenger_email_hash
