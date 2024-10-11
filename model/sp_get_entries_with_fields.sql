@@ -1,5 +1,5 @@
 DELIMITER $$
-CREATE PROCEDURE `sp_get_form_entries_with_fields`(
+CREATE PROCEDURE `sp_get_entries_with_fields`(
 	IN `form_name` VARCHAR(128) CHARSET utf8, 
 	IN `display_lang` VARCHAR(3) CHARSET utf8
 ) READS SQL DATA DETERMINISTIC
