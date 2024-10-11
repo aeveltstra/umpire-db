@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS `attributes`;
 CREATE TABLE `attributes` (
   `id` char(24) NOT NULL,
-  `data_type` enum('integer','shorttext','longtext','date','time','enum','percent','location','email') CHARACTER SET ascii NOT NULL,
+  `data_type` enum('integer','shorttext','longtext','date','time','enum','percent','location','email','images') CHARACTER SET ascii NOT NULL,
   `min` int(11) NOT NULL DEFAULT '0',
   `max` int(11) NOT NULL DEFAULT '256',
   `default` varchar(256) NOT NULL,
