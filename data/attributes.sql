@@ -22,6 +22,8 @@ INSERT INTO `attributes` (`id`, `data_type`, `min`, `max`, `default`, `is_write_
 ('height', 'integer', 1, 256, '', 0),
 ('height_unit', 'enum', 1, 256, 'inches', 0),
 ('identifying_features', 'longtext', 1, 65500, '', 0),
+('images', 'images', 0, 256, '', 0),
+('is_ok_to_publish', 'integer', 0, 1, '1', 0),
 ('last_seen_activity', 'longtext', 1, 65500, '', 0),
 ('last_seen_alive_date_acc', 'percent', 0, 100, '100', 0),
 ('last_seen_alive_on_date', 'date', 8, 8, '', 0),
@@ -34,6 +36,5 @@ INSERT INTO `attributes` (`id`, `data_type`, `min`, `max`, `default`, `is_write_
 ('posters_generated_on', 'date', 8, 8, '', 0),
 ('pronouns', 'shorttext', 1, 256, '', 0),
 ('reference_code', 'shorttext', 0, 256, '', 0),
-('subscription_email', 'email', 1, 256, '', 0),
 ('weight', 'integer', 1, 256, '', 0),
 ('weight_unit', 'enum', 1, 256, 'lbs', 0);
