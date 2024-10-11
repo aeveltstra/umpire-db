@@ -6,6 +6,8 @@ CREATE TABLE `images` (
   `is_public` tinyint(1) NOT NULL,
   `url` varchar(512) NOT NULL,
   `attribute` char(24) NOT NULL,
+  `alt` varchar(256) NULL,
+  `description` varchar(1024) NULL,
   `user` int(10) UNSIGNED NOT NULL,
   `at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Public and private media';
